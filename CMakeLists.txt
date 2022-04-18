@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 file(GLOB IMGUI_SOURCES "src/vendor/imgui/*.cpp")
+file(GLOB RENDER_TEST_SOURCES "src/tests/*.cpp")
 
 set(SOURCES
 	src/main.cpp
@@ -19,9 +20,13 @@ set(SOURCES
 	src/Shader.cpp
 	src/Texture.cpp
 
+	${RENDER_TEST_SOURCES}
+
 	src/vendor/stb/stb_image.cpp
 	${IMGUI_SOURCES}
 )
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/vendor)
 
