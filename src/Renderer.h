@@ -11,7 +11,11 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
-#define BREAKPOINT asm("int $3")
+#if defined(__i386__) || defined(__x86_64__)
+	#define BREAKPOINT __asm__("int $3\n" : : ) /* NOLINT */
+#elif defined(__aarch64__)
+	#define BREAKPOINT  __asm__(".inst 0xd4200000")
+#endif
 #define ASSERT(x) if (!(x)) BREAKPOINT
 
 #define GLCALL(x) glClearError();\
